@@ -1,0 +1,260 @@
+:root {
+    /* Primary Colors */
+    --primary-color: #985209;
+    --secondary-color: #d27d41;
+
+    /* Background Colors */
+    --background-color: #f9f9f9;
+    --background-overlay: rgba(255, 255, 255, 0.2);
+    --container-background: rgba(255, 255, 255, 0.9);
+    --background-image-url: url('https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+
+    /* Text Colors */
+    --white-color: #fff;
+    --label-color: #333333;
+    --heading-color: #3a3a3a;
+    /* Border Colors */
+    --input-border-color: #cccccc;
+
+    /* Button Colors */
+    --button-background: #a4683b;
+    --button-hover-background: #52280a;
+}
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+}
+
+body {
+    background: var(--background-image-url) no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+/* START OF FORM CSS */
+label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    color: var(--label-color);
+    margin-bottom: 5px;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid var(--input-border-color);
+    font-size: 14px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+button:hover {
+    background-color: var(--button-hover-background);
+}
+/* END OF FORM CSS */
+
+
+
+/* SEARCH BAR CSS  */
+.search-container {
+    width: 40%;
+}
+
+.search-label {
+    position: relative;
+    width: 100%;
+}
+
+.search-bar {
+    color: white;
+    background-color: var(--background-overlay);
+    outline: none;
+    font-size: 20px;
+}
+
+.search-bar::placeholder {
+    opacity: 50%;
+    color: var(--white-color);
+}
+
+.search-icon {
+    position: absolute;
+    top: 30%;
+    left: 96%;
+    color: var(--background-color);
+}
+/* END OF search bar Css  */
+
+
+/* MAIN CONTAINER  */
+.container {
+    width: 40%;
+    background: var(--container-background);
+    border-radius: 10px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+
+
+/* START OF TABS CSS */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.tab-button {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px 8px 0 0;
+    padding: 20px 0;
+    transition: background-color 0.4s;
+    font-size: 18px;
+    margin: 0 6px;
+}
+
+.tab-button:hover{
+    background-color: var(--button-hover-background);
+}
+/* END OF TABS CSS */
+
+
+
+/* START OF THE TWO PANELS' CSS */
+.panel {
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid var(--primary-color);
+    border-radius: 0 0 10px 10px;
+    display: none;
+    height: 500px;
+}
+
+.panel.active {
+    display: block;
+}
+
+.panel h2 {
+    color: var(--heading-color);
+    font-size: 24px;
+    font-family: Georgia sans-serif;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+/* END OF PANEL CSS */
+
+.translator-btn {
+     position: fixed;
+     top: 20px;
+     left: 20px;
+     width: 50px;
+     height: 50px;
+     border-radius: 50%;
+     background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+     border: none;
+     outline: none;
+     cursor: pointer;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     transition: width 0.5s ease, height 0.5s ease;
+ }
+
+.translator-btn:hover {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+    transition: width 0.5s ease, height 0.5s ease, background 1s ease;
+}
+
+.translator-btn:hover::after {
+    content: attr(data-hover-text);
+    position: absolute;
+    left: calc(100% + 10px); /* Position the text next to the button */
+    background-color: var(--button-background); /* Match button background color */
+    color: var(--white-color); /* Text color */
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+}
+
+/* Flash Message */
+.flash-message {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
+    border: 1px solid black;
+    transition: opacity 1s ease-out;
+}
+
+.flash-message:hover {
+    opacity: 1; /* Changed from 100% to 1 */
+    transition: opacity 0.2s ease-in, transform 0.4s ease-in-out;
+    transform: scale(1.05);
+}
+
+.flash-message.error {
+    background-color: #b6212e;
+}
+
+.flash-message.error:hover {
+    animation: shine 1s infinite alternate;
+    animation-fill-mode: forwards;
+}
+
+@keyframes shine {
+    from {
+        opacity: 0.5;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes shine {
+    0% {
+        background-color: rgba(236, 0, 0, 0.5);
+        box-shadow: 0 0 10px rgba(255, 235, 23, 0.5);
+    }
+    100% {
+        background-color: rgba(227, 0, 0, 0.9);
+        box-shadow: 0 0 20px rgb(80, 49, 17);
+    }
+}
+/* END OF FLASH MESSAGE */
