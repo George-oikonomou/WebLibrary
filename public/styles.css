@@ -167,34 +167,59 @@ button:hover {
     padding-bottom: 10px;
 }
 
+
+/*search hidden panel */
+#searchResultsPanel {
+    position: relative; /* Ensure relative positioning for child absolute positioning */
+    display: none;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid var(--primary-color);
+    border-radius: 0 0 10px 10px;
+    background-color: var(--container-background);
+    color: var(--heading-color);
+    font-size: 16px;
+    min-height: 500px; /* Ensure sufficient height for content and buttons */
+}
+
+#noResultsPanel{
+    position: relative; /* Ensure relative positioning for child absolute positioning */
+    display: none;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid var(--primary-color);
+    border-radius: 0 0 10px 10px;
+    background-color: var(--container-background);
+    color: var(--heading-color);
+    font-size: 16px;
+    min-height: 500px; /* Ensure sufficient height for content and buttons */
+}
+
 /* END OF PANEL CSS */
+.btn {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: width 0.5s ease, height 0.5s ease;
+}
 
-.translator-btn {
-     position: fixed;
-     top: 20px;
-     left: 20px;
-     width: 50px;
-     height: 50px;
-     border-radius: 50%;
-     background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-     border: none;
-     outline: none;
-     cursor: pointer;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     transition: width 0.5s ease, height 0.5s ease;
- }
-
-.translator-btn:hover {
+.btn:hover {
     width: 60px;
     height: 60px;
     background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
     transition: width 0.5s ease, height 0.5s ease, background 1s ease;
 }
 
-.translator-btn:hover::after {
-    content: attr(data-hover-text);
+.btn:hover::after {
+    content: attr(lang-hover-text);
     position: absolute;
     left: calc(100% + 10px); /* Position the text next to the button */
     background-color: var(--button-background); /* Match button background color */
@@ -205,6 +230,27 @@ button:hover {
     z-index: 999;
 }
 
+.translator-btn {
+    top: 20px;
+    left: 20px;
+}
+
+.RickRoll-btn {
+    top: 90px;
+    left: 20px;
+}
+.RickRoll-btn:hover::after {
+    display: none;
+}
+
+.library-btn {
+    top: 160px;
+    left: 20px;
+}
+
+.library-btn:hover::after {
+    content: attr(Library-hover-text);
+}
 /* Flash Message */
 .flash-message {
     display: none;
@@ -258,3 +304,79 @@ button:hover {
     }
 }
 /* END OF FLASH MESSAGE */
+
+/* Search Results */
+
+
+.book .title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.book .author,
+.book .genre,
+.book .price {
+    font-size: 14px;
+    margin-top: 5px;
+}
+/* Container for pagination buttons */
+.pagination-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 10px;
+    width: calc(100% - 9%); /* Adjust width to account for padding/borders if necessary */
+    padding: 0 10px; /* Adjust padding if necessary */
+}
+.search-results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 37px;
+    position: relative;
+    right: 2%;
+}
+
+.no-results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 37px;
+    position: relative;
+    right: 2%;
+}
+
+.book {
+    border: 3px solid var(--primary-color);
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+/* Pagination buttons styles */
+.previous-page-button,
+.next-page-button {
+
+    right: 5px;
+    width: 150px;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px; /* Smaller padding for smaller buttons */
+    cursor: pointer;
+    font-size: 12px; /* Smaller font size for smaller buttons */
+}
+
+.previous-page-button:hover,
+.next-page-button:hover {
+    background-color: var(--button-hover-background);
+}
+
+/* Page Indicator */
+.page-indicator {
+    font-size: 14px;
+    text-align: center;
+    flex-grow: 1;
+}

@@ -5,26 +5,30 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Book Management</title>
             <link rel="stylesheet" href="styles.css">
+            <link rel="icon" href="open-book.png" type="image/x-icon">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         </head>
         <body>
         <div class="flash-message" id="flashMessage" ></div>
-        <button class="translator-btn"><i class="fas fa-language"></i></button>
+        <button class="translator-btn btn"><i class="fas fa-language"></i></button>
+        <button class="RickRoll-btn btn"><i class="fab fa-youtube"></i></button>
+        <button class="library-btn btn"><i class="fas fa-book"></i></button>
+
 
         <div class="search-container">
             <label class="search-label">
-                <i class="fas fa-search search-icon"></i>
+                <i class="fas fa-search search-icon icon-left"></i>
                 <input type="text" class="search-bar" data-translate="search_placeholder">
             </label>
         </div>
 
         <div class="container">
             <div class="tabs">
-                <button class="tab-button active" data-tab="welcome" data-translate="tab_welcome"><i class="fas fa-home"></i> Welcome</button>
-                <button class="tab-button" data-tab="createBook" data-translate="tab_createBook"><i class="fas fa-plus-circle"></i> Create Book</button>
+                <button class="tab-button active" data-tab="welcome" data-translate="tab_welcome"><i class="fas fa-home icon-left"></i></button>
+                <button class="tab-button" data-tab="createBook" data-translate="tab_createBook"><i class="fas fa-plus-circle icon-left"></i></button>
             </div>
             <div id="welcome" class="panel active">
-                <h2 data-translate="welcome_heading"><i class="fas fa-home"></i> Welcome to the Book Management System</h2>
+                <h2 data-translate="welcome_heading"><i class="fas fa-home icon-left"></i></h2>
                 <p data-translate="welcome_text"></p>
                 <ul>
                     <li data-translate="welcome_add_book_text"></li>
@@ -33,7 +37,7 @@
                 <p data-translate="welcome_get_started"></p>
             </div>
             <div class="panel" id="createBook">
-                <h2 data-translate="create_book_heading"><i class="fas fa-book"></i> Create a New Book</h2>
+                <h2 data-translate="create_book_heading"><i class="fas fa-book icon-left"></i></h2>
                 <form id="addBookForm">
                     <label for="author" data-translate="author_label"></label>
                     <input type="text" id="author" name="author" data-translate="author_placeholder" >
@@ -46,8 +50,17 @@
                     <button type="submit" data-translate="submit_button"></button>
                 </form>
             </div>
+            <div id="searchResultsPanel" class="panel">
+                <div id="searchResults" class="search-results"></div>
+                    <div class="pagination-buttons">
+                        <button class="previous-page-button" data-translate="previous_page"><i class="fas fa-arrow-left icon-left"></i></button>
+                        <span class="page-indicator" data-translate="page-indicator"></span>
+                        <button class="next-page-button" data-translate="next_page"><i class="fas fa-arrow-right icon-right"></i></button>
+                    </div>
+            </div>
+
         </div>
-        <script src="script.js"></script>
+        <script type="module" src="Js/main.js"></script>
         </body>
 
 </html>
