@@ -70,7 +70,7 @@ const submitBook = bookData => {
             }
         })
         .catch(error => {
-            console.log(error)
+            console.error(error)
             showFlashMessage(window.translations.submit_post_error_message, true);
         });
 };

@@ -1,26 +1,18 @@
 :root {
-    /* Primary Colors */
     --primary-color: #985209;
     --secondary-color: #d27d41;
 
-    /* Background Colors */
+    --background-image-url: url('https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
     --background-color: #f9f9f9;
     --background-overlay: rgba(255, 255, 255, 0.2);
     --container-background: rgba(255, 255, 255, 0.9);
-    --background-image-url: url('https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-
-    /* Text Colors */
     --white-color: #fff;
     --label-color: #333333;
     --heading-color: #3a3a3a;
-    /* Border Colors */
     --input-border-color: #cccccc;
-
-    /* Button Colors */
     --button-background: #a4683b;
     --button-hover-background: #52280a;
 }
-
 
 html, body {
     height: 100%;
@@ -38,8 +30,6 @@ body {
     flex-direction: column;
 }
 
-
-/* START OF FORM CSS */
 label {
     display: block;
     text-align: left;
@@ -71,17 +61,9 @@ button {
     transition: background-color 0.5s;
 }
 
-button:hover {
-    background-color: var(--button-hover-background);
-}
-/* END OF FORM CSS */
+button:hover { background-color: var(--button-hover-background); }
 
-
-
-/* SEARCH BAR CSS  */
-.search-container {
-    width: 40%;
-}
+.search-container { width: 40%; }
 
 .search-label {
     position: relative;
@@ -92,7 +74,6 @@ button:hover {
     color: white;
     background-color: var(--background-overlay);
     outline: none;
-    font-size: 20px;
 }
 
 .search-bar::placeholder {
@@ -107,10 +88,7 @@ button:hover {
     left: 96%;
     color: var(--background-color);
 }
-/* END OF search bar Css  */
 
-
-/* MAIN CONTAINER  */
 .container {
     width: 40%;
     background: var(--container-background);
@@ -119,9 +97,6 @@ button:hover {
     box-sizing: border-box;
 }
 
-
-
-/* START OF TABS CSS */
 .tabs {
     display: flex;
     justify-content: space-around;
@@ -130,7 +105,6 @@ button:hover {
 
 .tab-button {
     background-color: var(--primary-color);
-    border: none;
     border-radius: 8px 8px 0 0;
     padding: 20px 0;
     transition: background-color 0.4s;
@@ -138,14 +112,8 @@ button:hover {
     margin: 0 6px;
 }
 
-.tab-button:hover{
-    background-color: var(--button-hover-background);
-}
-/* END OF TABS CSS */
+.tab-button:hover{ background-color: var(--button-hover-background); }
 
-
-
-/* START OF THE TWO PANELS' CSS */
 .panel {
     padding: 20px;
     box-sizing: border-box;
@@ -155,9 +123,7 @@ button:hover {
     height: 500px;
 }
 
-.panel.active {
-    display: block;
-}
+.panel.active { display: block; }
 
 .panel h2 {
     color: var(--heading-color);
@@ -168,10 +134,8 @@ button:hover {
     padding-bottom: 10px;
 }
 
-
-/*search hidden panel */
 #searchResultsPanel {
-    position: relative; /* Ensure relative positioning for child absolute positioning */
+    position: relative;
     display: none;
     padding: 20px;
     box-sizing: border-box;
@@ -180,23 +144,16 @@ button:hover {
     background-color: var(--container-background);
     color: var(--heading-color);
     font-size: 16px;
-    min-height: 500px; /* Ensure sufficient height for content and buttons */
+    min-height: 500px;
 }
 
-
-/* END OF PANEL CSS */
 .btn {
     position: fixed;
     width: 50px;
     height: 50px;
     border-radius: 50%;
     background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-    border: none;
-    outline: none;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     transition: width 0.5s ease, height 0.5s ease;
 }
 
@@ -210,9 +167,9 @@ button:hover {
 .btn:hover::after {
     content: attr(lang-hover-text);
     position: absolute;
-    left: calc(100% + 10px); /* Position the text next to the button */
-    background-color: var(--button-background); /* Match button background color */
-    color: var(--white-color); /* Text color */
+    left: calc(100% + 10px);
+    background-color: var(--button-background);
+    color: var(--white-color);
     padding: 5px 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -228,9 +185,7 @@ button:hover {
     top: 90px;
     left: 20px;
 }
-.RickRoll-btn:hover::after {
-    display: none;
-}
+.RickRoll-btn:hover::after { display: none; }
 
 .library-btn {
     top: 160px;
@@ -240,7 +195,6 @@ button:hover {
 .library-btn:hover::after {
     content: attr(Library-hover-text);
 }
-/* Flash Message */
 .flash-message {
     display: none;
     position: fixed;
@@ -258,14 +212,12 @@ button:hover {
 }
 
 .flash-message:hover {
-    opacity: 1; /* Changed from 100% to 1 */
+    opacity: 1;
     transition: opacity 0.2s ease-in, transform 0.4s ease-in-out;
     transform: scale(1.05);
 }
 
-.flash-message.error {
-    background-color: #b6212e;
-}
+.flash-message.error { background-color: #b6212e; }
 
 .flash-message.error:hover {
     animation: shine 1s infinite alternate;
@@ -292,23 +244,17 @@ button:hover {
         box-shadow: 0 0 20px rgb(80, 49, 17);
     }
 }
-/* END OF FLASH MESSAGE */
 
-/* Search Results */
 .book .title {
     font-weight: bold;
     font-size: 18px;
 }
 
-.book .author,
-.book .genre,
-.book .price {
+.book .author, .book .genre, .book .price {
     font-size: 14px;
     margin-top: 5px;
 }
-/*end of search results */
 
-/* Container for pagination buttons */
 .pagination-buttons {
     display: flex;
     justify-content: space-between;
@@ -319,7 +265,6 @@ button:hover {
     padding: 0 10px;
 }
 
-/* Search Results */
 .search-results {
     max-height: 500px;
     max-width: 100%;
@@ -330,51 +275,26 @@ button:hover {
     right: 2%;
 }
 
-.no-results {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 37px;
-    position: relative;
-    right: 2%;
-}
-/* end of search results */
-
-/* book */
 .book {
     overflow-y: auto;
     border: 3px solid var(--primary-color);
     background-color: var(--secondary-color);
-    border-radius: 5px;
+    border-radius: 9px;
     padding: 10px;
     width: 100%;
 }
 
-/* previous - next buttons */
 .previous-page-button,
 .next-page-button {
-
     right: 5px;
     width: 150px;
-    background-color: var(--primary-color);
-    color: var(--white-color);
-    border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 5px 10px;
-    cursor: pointer;
     font-size: 12px;
 }
 
-.previous-page-button:hover,
-.next-page-button:hover {
-    background-color: var(--button-hover-background);
-}
-
-/* Page Indicator */
 .page-indicator {
     font-size: 14px;
     text-align: center;
     flex-grow: 1;
 }
-
-
-/* TODO */
