@@ -3,89 +3,82 @@ import { state } from './state.js';
 import { showFlashMessage } from './utils/flashMessage.js';
 import { getFormValidationErrors, getBookData } from './utils/formValidation.js';
 import { loadTranslations, applyTranslations } from './utils/translation.js';
-import { fetchSearchResults ,showSearchResults , fetchAllBooks } from './utils/search.js';
+import { fetchSearchResults, showSearchResults, fetchAllBooks } from './utils/search.js';
 import { prevPage, nextPage } from './pagination.js';
 
-ELEMENTS.rickRollBtn.addEventListener('click', () => {
-    window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-});
+const updateTranslatorHoverText = () => {
+    ELEMENTS.translatorBtn.setAttribute('lang-hover-text', state.currentLang === 'en' ? 'Greek' : 'English');
+    ELEMENTS.libraryBtn.setAttribute('library-hover-text', state.currentLang === 'en' ? 'All Books' : 'Όλα Τα βιβλία');
+};
 
-ELEMENTS.addBookForm.addEventListener('submit', event => {
+const handleFormSubmit = async event => {
     event.preventDefault();
+    const errors = await getFormValidationErrors(window.translations);
 
-    loadTranslations(state.currentLang, () => {
-        let errors = getFormValidationErrors(window.translations);
+    if (errors)
+        showFlashMessage(`${window.translations.submit_error_message}<ul>${errors.map(e => `<li>${e}</li>`).join('')}</ul>`, true);
+    else
+        submitBook(getBookData());
+};
 
-        if (errors === null)
-            submitBook(getBookData());
-        else
-            showFlashMessage(`${window.translations.submit_error_message}<ul>${errors.map(e => `<li>${e}</li>`).join('')}</ul>`, true);
-    });
-});
-
-ELEMENTS.tabButtons.forEach(button => button.addEventListener("click", () => {
+const handleTabClick = button => {
     ELEMENTS.tabButtons.forEach(btn => btn.classList.remove("active"));
     button.classList.add("active");
     ELEMENTS.searchResultsPanel.style.display = 'none';
     ELEMENTS.panels.forEach(panel => panel.classList.toggle("active", panel.id === button.getAttribute("data-tab")));
-}));
+};
 
-ELEMENTS.translatorBtn.addEventListener('click', () => {
+const handleTranslatorClick = () => {
     state.currentLang = state.currentLang === 'en' ? 'gr' : 'en';
     updateTranslatorHoverText();
     loadTranslations(state.currentLang, translations => {
         applyTranslations(translations);
-        if (ELEMENTS.searchResultsPanel.classList.contains('active'))
-            showSearchResults();
+        if (ELEMENTS.searchResultsPanel.classList.contains('active')) showSearchResults();
     });
-});
+};
+const handleSearch = async keyword => {
+    if (!keyword)
+        showFlashMessage(window.translations.no_search_term_error, true);
+    else if (keyword.length < 3)
+        showFlashMessage(window.translations.search_term_length_error, true);
+    else
+        await fetchSearchResults(keyword, window.translations.search_success_message.replace('{keyword}', keyword));
+};
 
-ELEMENTS.libraryBtn.addEventListener('click', () => {
-    fetchAllBooks();
-});
-
-ELEMENTS.searchBar.addEventListener('keypress', event => {
+const handleSearchEvent = async event => {
     if (event.key === 'Enter') {
         event.preventDefault();
         const keyword = event.target.value.trim();
-
-        if (!keyword) {
-            showFlashMessage(window.translations.no_search_term_error, true);
-        } else if (keyword.length < 3) {
-            showFlashMessage(window.translations.search_term_length_error, true);
-        } else {
-            const searchSuccessMessage = window.translations.search_success_message.replace('{keyword}', keyword);
-
-            fetchSearchResults(keyword, searchSuccessMessage);
-        }
+        await handleSearch(keyword);
     }
-});
+};
 
+const handleSearchIconClick = async () => {
+    const keyword = ELEMENTS.searchBar.value.trim();
+    await handleSearch(keyword);
+};
+
+const submitBook = bookData => {
+    fetch('/books', {method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(bookData)})
+        .then(response => {
+            showFlashMessage(translations.submit_success_message);
+            ELEMENTS.addBookForm.reset();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showFlashMessage(error, true);
+        });
+};
+
+ELEMENTS.rickRollBtn.addEventListener('click', () => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ'));
+ELEMENTS.addBookForm.addEventListener('submit', handleFormSubmit);
+ELEMENTS.tabButtons.forEach(button => button.addEventListener("click", () => handleTabClick(button)));
+ELEMENTS.translatorBtn.addEventListener('click', handleTranslatorClick);
+ELEMENTS.libraryBtn.addEventListener('click', fetchAllBooks);
+ELEMENTS.searchBar.addEventListener('keypress', handleSearchEvent);
+ELEMENTS.searchIcon.addEventListener('click', handleSearchIconClick);
 ELEMENTS.prevPageButton.addEventListener('click', prevPage);
 ELEMENTS.nextPageButton.addEventListener('click', nextPage);
 
-const updateTranslatorHoverText = () => {
-    ELEMENTS.translatorBtn.setAttribute('lang-hover-text', state.currentLang === 'en' ? 'Greek' : 'English');
-    ELEMENTS.libraryBtn.setAttribute('library-hover-text', state.currentLang === 'en' ? 'Αll Books' : 'Όλα Τα βιβλία');
-};
-
 updateTranslatorHoverText();
 loadTranslations(state.currentLang, applyTranslations);
-
-const submitBook = (bookData) => {
-    fetch('/books', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(bookData)})
-        .then(response => {
-
-            if (response.ok)
-                showFlashMessage(translations.submit_success_message);
-            else
-                showFlashMessage(translations.db_error_post_message, true);
-
-            ELEMENTS.addBookForm.reset();
-
-        }).catch(error => {
-            console.error('Error:', error);
-            showFlashMessage(translations.db_error_post_message, true);
-        }
-    );
-}

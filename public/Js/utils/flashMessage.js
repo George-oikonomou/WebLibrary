@@ -9,19 +9,17 @@ export const showFlashMessage = (message, isError = false) => {
 
     clearTimeout(state.hideTimeout);
     ELEMENTS.flashMessage.onmouseover = () => clearTimeout(state.hideTimeout);
-    ELEMENTS.flashMessage.onmouseleave = () => hideFlashMessageWithDelay();
+    ELEMENTS.flashMessage.onmouseleave = ()=> hideFlashMessageWithDelay();
     hideFlashMessageWithDelay();
 };
 
 const hideFlashMessageWithDelay = () => {
-    state.hideTimeout = setTimeout(hideFlashMessage, CONFIG.FLASH_HIDE_DELAY);
-};
-
-const hideFlashMessage = () => {
-    ELEMENTS.flashMessage.style.transition = `opacity 1s ease-out`;
-    ELEMENTS.flashMessage.style.opacity = '0';
-    setTimeout(() => {
-        ELEMENTS.flashMessage.style.display = 'none';
-        ELEMENTS.flashMessage.style.opacity = '1';
-    }, CONFIG.FLASH_FADE_OUT_DURATION);
+    state.hideTimeout = setTimeout(() => {
+        ELEMENTS.flashMessage.style.transition = `opacity 1s ease-out`;
+        ELEMENTS.flashMessage.style.opacity = '0';
+        setTimeout(() => {
+            ELEMENTS.flashMessage.style.display = 'none';
+            ELEMENTS.flashMessage.style.opacity = '1';
+        }, CONFIG.FLASH_FADE_OUT_DURATION);
+    }, CONFIG.FLASH_HIDE_DELAY);
 };

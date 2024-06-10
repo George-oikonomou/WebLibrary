@@ -11,14 +11,12 @@ db.serialize(() => {
         price REAL NOT NULL
     )`);
 
-    // Check if the table is empty
     db.get("SELECT COUNT(*) as count FROM books", (err, row) => {
         if (err) {
             console.error("Error checking table:", err);
             return;
         }
 
-        // If the table is empty, insert records
         if (row.count === 0) {
             const statement = db.prepare(`INSERT INTO books (author, title, genre, price) VALUES (?, ?, ?, ?)`);
             const books = [
@@ -27,8 +25,6 @@ db.serialize(() => {
             ];
             books.forEach(book => statement.run(book));
             statement.finalize();
-        } else {
-            console.log("Table already populated, skipping insertion.");
         }
     });
 });

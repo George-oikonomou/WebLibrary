@@ -42,7 +42,7 @@ server.get('/Library', (req, res) => {
         if (err)
             return res.status(500).json({ message: 'Database error' });
         else
-            res.json(rows);
+            return res.status(200).json(rows);
     });
 });
 

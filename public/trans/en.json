@@ -4,7 +4,7 @@
   "welcome_heading": "Welcome to the Book Management System",
   "welcome_text": "This system allows you to easily manage your book collection. You can perform the following actions:",
   "welcome_add_book_text": "Add a New Book: Enter book details. The system will guide you through the process.",
-  "welcome_search_books_text": "Search for Books: Find books by entering keywords. The system will display matching results.",
+  "welcome_search_books_text": "Search for Books: Find books by entering the title and pressing 'Enter'. The system will display matching results.",
   "welcome_get_started": "Get started by using the search bar or by switching to the \"Αdd a Book\" tab.",
   "create_book_heading": "Create a New Book",
   "author_label": "Author",
@@ -21,7 +21,7 @@
   "empty_genre_error": "Genre field cannot be empty",
   "empty_title_error": "Title field cannot be empty",
   "empty_price_error": "Price field cannot be empty",
-  "invalid_price_error": "Price must be a number between 0 and 100000000",
+  "invalid_price_error": "Price must be a number between 0.01 and 100000000",
   "submit_success_message": "Your book has been submitted successfully",
   "submit_error_message": "The following errors occurred:",
   "no_search_term_error":"Please enter a keyword to search.",
@@ -35,6 +35,7 @@
   "title_length_error": "Title must be at least 3 characters long",
   "library_success_message": "Books fetched successfully",
   "no_results": "<ins>No results found \n You might as well add the book",
+  "book_exists_error": "Book already exists",
   "genres": [
     "Science fiction",
     "Satire",
@@ -45,3 +46,4 @@
     "Horror"
   ]
 }
+

@@ -1,17 +1,13 @@
-import { ELEMENTS } from './elements.js';
 import { state } from './state.js';
 import { showSearchResults } from './utils/search.js';
 
-export const prevPage = () => {
-    if (state.currentPage > 1) {
-        state.currentPage--;
-        showSearchResults();
+const changePage = async (direction) => {
+    if ((direction === 'prev' && state.currentPage > 1) ||
+        (direction === 'next' && state.currentPage < state.totalPages)) {
+        state.currentPage += direction === 'prev' ? -1 : 1;
+        await showSearchResults();
     }
 };
 
-export const nextPage = () => {
-    if (state.currentPage < state.totalPages) {
-        state.currentPage++;
-        showSearchResults();
-    }
-};
+export const prevPage = () => changePage('prev');
+export const nextPage = () => changePage('next');

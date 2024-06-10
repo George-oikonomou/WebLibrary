@@ -102,6 +102,7 @@ button:hover {
 
 .search-icon {
     position: absolute;
+    cursor: pointer;
     top: 30%;
     left: 96%;
     color: var(--background-color);
@@ -306,8 +307,6 @@ button:hover {
 /* END OF FLASH MESSAGE */
 
 /* Search Results */
-
-
 .book .title {
     font-weight: bold;
     font-size: 18px;
@@ -319,6 +318,8 @@ button:hover {
     font-size: 14px;
     margin-top: 5px;
 }
+/*end of search results */
+
 /* Container for pagination buttons */
 .pagination-buttons {
     display: flex;
@@ -326,10 +327,14 @@ button:hover {
     align-items: center;
     position: absolute;
     bottom: 10px;
-    width: calc(100% - 9%); /* Adjust width to account for padding/borders if necessary */
-    padding: 0 10px; /* Adjust padding if necessary */
+    width: calc(100% - 9%);
+    padding: 0 10px;
 }
+
+/* Search Results */
 .search-results {
+    max-height: 500px;
+    max-width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 37px;
@@ -344,7 +349,9 @@ button:hover {
     position: relative;
     right: 2%;
 }
+/* end of search results */
 
+/* book */
 .book {
     border: 3px solid var(--primary-color);
     background-color: var(--secondary-color);
@@ -354,7 +361,7 @@ button:hover {
     height: 100%;
 }
 
-/* Pagination buttons styles */
+/* previous - next buttons */
 .previous-page-button,
 .next-page-button {
 
@@ -364,9 +371,9 @@ button:hover {
     color: var(--white-color);
     border: none;
     border-radius: 4px;
-    padding: 5px 10px; /* Smaller padding for smaller buttons */
+    padding: 5px 10px;
     cursor: pointer;
-    font-size: 12px; /* Smaller font size for smaller buttons */
+    font-size: 12px;
 }
 
 .previous-page-button:hover,
@@ -380,3 +387,6 @@ button:hover {
     text-align: center;
     flex-grow: 1;
 }
+
+
+/* TODO */
