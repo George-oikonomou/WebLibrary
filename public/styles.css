@@ -246,11 +246,13 @@ button:hover { background-color: var(--button-hover-background); }
 }
 
 .book .title {
+    white-space: nowrap;
     font-weight: bold;
     font-size: 18px;
 }
 
 .book .author, .book .genre, .book .price {
+    white-space: nowrap;
     font-size: 14px;
     margin-top: 5px;
 }
@@ -266,17 +268,18 @@ button:hover { background-color: var(--button-hover-background); }
 }
 
 .search-results {
-    max-height: 500px;
-    max-width: 100%;
+    column-gap: 35px;
+    row-gap: 25px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 37px;
     position: relative;
     right: 2%;
+    grid-auto-rows: minmax(20px, 125px);
 }
 
 .book {
-    overflow-y: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
     border: 3px solid var(--primary-color);
     background-color: var(--secondary-color);
     border-radius: 9px;
@@ -284,12 +287,33 @@ button:hover { background-color: var(--button-hover-background); }
     width: 100%;
 }
 
+.book::-webkit-scrollbar {
+    width: 5px;
+}
+
+.book::-webkit-scrollbar-track {
+    background: #f5812c;
+    border-radius: 10px;
+}
+
+.book::-webkit-scrollbar-thumb {
+    background-color:  var(--secondary-color);
+    border-radius: 10px;
+    border: 3px solid var(--primary-color);
+}
+
+.book::-webkit-scrollbar-thumb:hover {
+    background-color: var(--button-hover-background)  ;
+}
+
+
 .previous-page-button,
 .next-page-button {
-    right: 5px;
+
+    right: 15px;
     width: 150px;
-    border-radius: 10px;
-    padding: 5px 10px;
+    border-radius: 20px;
+    padding: 4px 10px;
     font-size: 12px;
 }
 
