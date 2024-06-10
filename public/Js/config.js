@@ -3,6 +3,7 @@ export const CONFIG = {
     FLASH_HIDE_DELAY: 2000,
     FLASH_FADE_OUT_DURATION: 1000,
     MAX_PRICE: 100000000,
+    MIN_PRICE: 0.01,
     DEFAULT_LANG: 'en',
     TRANSLATIONS_PATH: '../trans/'
 };

@@ -18,7 +18,7 @@ server.post('/books', (req, res) => {
 
     statement.run([author, title, genre, price], function(err) {
         if (err)
-            return res.status(500).json({ message: "database error"});
+            return res.status(500).json({ message: err });
         else
             return  res.status(200).json({ message: 'Book added successfully\n' , id: this.lastID ,author : author,title: title,genre: genre,price: price});
     });
@@ -30,9 +30,9 @@ server.get('/books/:keyword', (req, res) => {
     const keyword = `%${req.params.keyword}%`;
     db.all(`SELECT * FROM books WHERE title LIKE ?`, [keyword], (err, rows) => {
         if (err)
-            return res.status(500).json({ message: 'Database error' });
+            return res.status(500).json({ err });
         else
-            res.json(rows);
+            res.status(200).json(rows);
 
     });
 });

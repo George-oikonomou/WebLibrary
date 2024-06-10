@@ -23,7 +23,7 @@
   "empty_genre_error": "Genre field cannot be empty",
   "empty_title_error": "Title field cannot be empty",
   "empty_price_error": "Price field cannot be empty",
-  "invalid_author_type_error": "Author cant have numbers",
+  "invalid_author_type_error": "Author can't have numbers in it",
   "invalid_price_error": "Price must be a number between 0.01 and 100000000",
   "invalid_price_type_error": "Price must be a number with up to 2 decimal places",
   "submit_success_message": "Your book has been submitted successfully",
@@ -41,6 +41,9 @@
   "library_success_message": "Books fetched successfully",
   "no_results": "<ins>No results found. You might as well add the book</ins>",
   "book_exists_error": "Book already exists",
+  "error_while_fetching_results": "An error occurred while we were looking for the book : {keyword}",
+  "error_fetching_library": "An error occurred while fetching All Books",
+  "submit_post_error_message": "An error occurred while submitting the book",
   "genres": [
     "Science fiction",
     "Satire",

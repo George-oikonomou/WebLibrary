@@ -14,11 +14,12 @@ const updateTranslatorHoverText = () => {
 const handleFormSubmit = async event => {
     event.preventDefault();
     const errors = await getFormValidationErrors(window.translations);
-
-    if (errors.length)
-        showFlashMessage(`${window.translations.submit_error_message}<ul>${errors.map(e => `<li>${e}</li>`).join('')}</ul>`, true);
-    else
-        submitBook(getBookData());
+    if (errors){
+        if (errors.length)
+            showFlashMessage(`${window.translations.submit_error_message}<ul>${errors.map(e => `<li>${e}</li>`).join('')}</ul>`, true);
+        else
+            submitBook(getBookData());
+    }
 };
 
 const handleTabClick = button => {
@@ -42,7 +43,7 @@ const handleSearch = async keyword => {
     else if (keyword.length < 3)
         showFlashMessage(window.translations.search_term_length_error, true);
     else
-        await fetchSearchResults(keyword, window.translations.search_success_message.replace('{keyword}', keyword));
+        await fetchSearchResults(keyword);
 };
 
 const handleSearchEvent = async event => {
@@ -61,12 +62,16 @@ const handleSearchIconClick = async () => {
 const submitBook = bookData => {
     fetch('/books', {method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(bookData)})
         .then(response => {
-            showFlashMessage(translations.submit_success_message);
-            ELEMENTS.addBookForm.reset();
+            if (response.ok) {
+                showFlashMessage(translations.submit_success_message);
+                ELEMENTS.addBookForm.reset();
+            }else {
+                throw new Error(response.statusText + ' Error code: ' + response.status);
+            }
         })
         .catch(error => {
-            console.error('Error:', error);
-            showFlashMessage(error, true);
+            console.log(error)
+            showFlashMessage(window.translations.submit_post_error_message, true);
         });
 };
 

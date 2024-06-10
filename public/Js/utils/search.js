@@ -32,7 +32,7 @@ const displaySearchResults = () => {
         `).join('');
 };
 
-export const fetchSearchResults = async (keyword, searchSuccessMessage) => {
+export const fetchSearchResults = async (keyword) => {
     try {
         const response = await fetch(`/books/${keyword}`);
         state.searchResults = await response.json();
@@ -41,13 +41,13 @@ export const fetchSearchResults = async (keyword, searchSuccessMessage) => {
 
         if (state.searchResults.length > 0) {
             await showSearchResults();
-            showFlashMessage(searchSuccessMessage);
+            showFlashMessage( window.translations.search_success_message.replace('{keyword}', keyword));
         } else {
             showFlashMessage(window.translations.no_results, true);
         }
     } catch (error) {
         console.error('Error:\n', error);
-        showFlashMessage(error, true);
+        showFlashMessage(window.translations.error_while_fetching_results.replace('{keyword}',keyword), true);
     }
 };
 
@@ -74,6 +74,6 @@ export const fetchAllBooks = async () => {
         }
     } catch (error) {
         console.error('Error:', error);
-        showFlashMessage(error, true);
+        showFlashMessage(window.translations.error_fetching_library, true);
     }
 };

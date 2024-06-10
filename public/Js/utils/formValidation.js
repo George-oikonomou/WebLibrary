@@ -29,28 +29,26 @@ export const getFormValidationErrors = async (translations) => {
     const errors = [];
     const {author, title, genre, price} = getBookData();
 
-    if (!author )
+    if (!author)
         errors.push(translations.empty_author_error);
-    else if (author && author.length < 3 && author.length > 50)
+    else if ( author.length < 3 || author.length > 100)
         errors.push(translations.author_length_error);
-
-    if (/\d/.test(author)) {
-        errors.push(translations.author_number_error);
+    else if (/\d/.test(author)) {
+        errors.push(translations.invalid_author_type_error);
     }
-
 
     if (!title)
         errors.push(translations.empty_title_error);
-    else if (title && title.length < 3 && title.length > 100)
+    else if (title.length < 3 || title.length > 100)
         errors.push(translations.title_length_error);
 
     if (!genre) errors.push(translations.empty_genre_error);
 
-    if (price === "")
+    if (!price)
         errors.push(translations.empty_price_error);
     else if (price && !/^\d+(\.\d{1,2})?$/.test(price))
         errors.push(translations.invalid_price_type_error);
-    else if (isNaN(price) || price < 0.01 || price > CONFIG.MAX_PRICE)
+    else if (isNaN(price) || price < CONFIG.MIN_PRICE || price > CONFIG.MAX_PRICE)
         errors.push(translations.invalid_price_error);
 
     if (!errors.length && await bookExists({author, title}))
