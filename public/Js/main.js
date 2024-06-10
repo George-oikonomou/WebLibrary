@@ -15,7 +15,7 @@ const handleFormSubmit = async event => {
     event.preventDefault();
     const errors = await getFormValidationErrors(window.translations);
 
-    if (errors)
+    if (errors.length)
         showFlashMessage(`${window.translations.submit_error_message}<ul>${errors.map(e => `<li>${e}</li>`).join('')}</ul>`, true);
     else
         submitBook(getBookData());

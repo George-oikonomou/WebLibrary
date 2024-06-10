@@ -44,9 +44,6 @@ export const getFormValidationErrors = async (translations) => {
     else if (title && title.length < 3 && title.length > 100)
         errors.push(translations.title_length_error);
 
-    if (await bookExists({author, title}))
-        errors.push(translations.book_exists_error);
-
     if (!genre) errors.push(translations.empty_genre_error);
 
     if (price === "")
@@ -56,5 +53,8 @@ export const getFormValidationErrors = async (translations) => {
     else if (isNaN(price) || price < 0.01 || price > CONFIG.MAX_PRICE)
         errors.push(translations.invalid_price_error);
 
-    return errors.length ? errors : null;
+    if (!errors.length && await bookExists({author, title}))
+        errors.push(translations.book_exists_error);
+
+    return errors ?? null;
 };
