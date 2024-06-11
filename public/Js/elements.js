@@ -1,4 +1,5 @@
 export const ELEMENTS = {
+    createBook:             document.getElementById('createBook'),
     searchBar:              document.querySelector('.search-bar'),
     searchResultsPanel:     document.getElementById('searchResultsPanel'),
     searchResultsContainer: document.getElementById('searchResults'),

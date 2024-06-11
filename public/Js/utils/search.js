@@ -43,6 +43,13 @@ export const fetchSearchResults = async (keyword) => {
             await showSearchResults();
             showFlashMessage( window.translations.search_success_message.replace('{keyword}', keyword));
         } else {
+            const currentPanel = document.querySelector('.panel.active');
+            currentPanel.classList.remove('active');
+            ELEMENTS.addBookForm.style.display = 'block';
+            ELEMENTS.addBookForm.classList.add('active');
+            ELEMENTS.createBook.classList.add('active');
+            ELEMENTS.searchResultsPanel.style.display = 'none';
+            ELEMENTS.searchResultsContainer.style.display = 'none';
             showFlashMessage(window.translations.no_results, true);
         }
     } catch (error) {
